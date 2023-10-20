@@ -1,0 +1,21 @@
+name: "website"
+on:
+  push:
+    branches: ["develop","release"] 
+    patchs: ["website/**"]
+
+jobs:
+  build-deploy-dev:
+    runs-on: ubuntu-lastest
+    enviroment: github-pages
+    if: github.ref == 'refs/head/develop'
+    defaults:
+      run:
+        working-directory: ./website
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: actions/configure-aws-credentials@v1
+      - run: awk -v var1="${{ secret.DEV_VPC_SUBNET }}" -v var2="${{}}"
+          
