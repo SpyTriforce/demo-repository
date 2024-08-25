@@ -1,0 +1,40 @@
+---
+swagger: "2.0"
+info:
+  version: "2024-08-25T20:05:45Z"
+  title: "apiprueba"
+host: "ibrbhera96.execute-api.us-east-1.amazonaws.com"
+basePath: "/DEV"
+schemes:
+- "https"
+paths:
+  /{account+}:
+    post:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "account"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+      x-amazon-apigateway-integration:
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:577638356059:function:account/invocations"
+        responses:
+          default:
+            statusCode: "200"
+        passthroughBehavior: "when_no_match"
+        cacheNamespace: "z3qp3h"
+        cacheKeyParameters:
+        - "method.request.path.account"
+        contentHandling: "CONVERT_TO_TEXT"
+        type: "aws_proxy"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
