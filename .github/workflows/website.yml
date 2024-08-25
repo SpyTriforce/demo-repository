@@ -22,5 +22,5 @@ jobs:
           # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
           # aws-session-token: ${{ secrets.AWS_SESSION_TOKEN_DEV }}
           # aws-region: ${{ secrets.REGION }}
-      - run: awk -v var1="${{ vars.DEV_EDAD }}" -v var2="${{ vars.DEV_ANACI }}" '{ gsub(/edad/,var1); gsub(/anaci/,var2); print }' lambda.yaml > lambda_new.yaml && lambda_new.yaml lambda.yaml 
+      - run: awk -v var1="${{ vars.DEV_EDAD }}" -v var2="${{ vars.DEV_ANACI }}" '{ gsub(/edad/,var1); gsub(/anaci/,var2); print }' lambda.yaml > lambda_new.yaml && mv lambda_new.yaml lambda.yaml 
       
