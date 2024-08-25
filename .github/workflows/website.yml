@@ -7,7 +7,7 @@ on:
 jobs:
   build-deploy-dev:
     runs-on: ubuntu-lastest
-    enviroment: github-pages
+    enviroment: proyectoweb
     if: github.ref == 'refs/head/develop'
     defaults:
       run:
@@ -17,5 +17,10 @@ jobs:
       - uses: actions/setup-python@v2
       - uses: aws-actions/setup-sam@v1
       - uses: actions/configure-aws-credentials@v1
-      - run: awk -v var1="${{ secret.DEV_VPC_SUBNET }}" -v var2="${{}}"
-          
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCES_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN_DEV }}
+          aws-region: ${{ secrets.REGION }}
+      - run: awk -v var1="${{ secret.DEV_EDAD }}" -v var2="${{ secret.DEV_ANACI }}" '{ gsub(/edad/,var1); gsub(/anaci/,var2); print }' lambda.yaml > lambda_new.yaml && lambda_new.yaml lambda.yaml 
+      
