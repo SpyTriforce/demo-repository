@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - uses: aws-actions/setup-sam@v1
-      - uses: actions/configure-aws-credentials@v1
+      #- uses: actions/configure-aws-credentials@v1
         #with:
           # aws-access-key-id: ${{ secrets.AWS_ACCES_KEY_ID_DEV }}
           # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
